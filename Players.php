@@ -43,6 +43,7 @@ echo "# Current Player : " . count($players, COUNT_RECURSIVE) . " #\n
 # - #
 # * Max player 2 or 3 #
 # ------------------------------------------------- ---- #\n \n";
+var_dump($players);
 // var_dump($players);
 // var_dump(count($players, COUNT_RECURSIVE)<3);
 
@@ -83,33 +84,36 @@ echo "\n# -
 	// }
 // die();
 } elseif ($input_mode=="start") {
-foreach ($players[$input_name] as $value) {
-	echo $value->name;
-}
-var_dump($players[$input_name]);
+// var_dump($players[$input_name]);
 echo "# ============================== #
 # Welcome to the Battle Arena #
 # ------------------------------------------------- ---- #
 Battle Start:
 who will attack: ";
-	fscanf(STDIN, "%s\n", $scan_player);
-	if ($scan_player==$players[$input_name]) {
-		
+	fscanf(STDIN, "%s\n", $attack);
+	foreach ($players as $key => $value) {
+
+		if ($attack==$value->get_name()) {
+		echo "who attacked : ";
+		fscanf(STDIN, "%s\n", $attacked);
+			if ($attacked==$value->get_name()) {
+echo "# Welcome to the Battle Arena #
+# ------------------------------------------------- ---- #
+Battle Start:
+who will attack: " . $attack .
+"who attacked: " . $attacked .
+"Description: ";
+// $value[0]->get_name() . ": manna = " . <rest>, blood = <rest>
+// <Nama_player_2>: manna = <rest>, blood = <rest>"
+				
+			}
+		}
+		echo $value->get_name();
 	}
 
-// fscanf(STDIN, "%s\n", $number_players);
-// who attacked
 // : <Nama_player_2>
 // when pressing enter out the results:
 // # ============================== #
-// # Welcome to the Battle Arena #
-// # ------------------------------------------------- ---- #
-// Battle Start:
-// who will attack: <nama_player_1>
-// who attacked: <nama_player_2>
-// Description:
-// <Nama_player_1>: manna = <rest>, blood = <rest>
-// <Nama_player_2>: manna = <rest>, blood = <rest>
 } else {
 	echo "Your input is " . $input_mode . "\n Please make sure with your input\n";
 	// die();
