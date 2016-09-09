@@ -4,7 +4,7 @@ class Player {
 	function __construct($new_name) {
 		$this->name = $new_name;
 		$this->blood = 100;
-		$this->mana = 40;
+		$this->mana = 30;
 	}
 
 	// public function set_name($new_name) {
@@ -20,105 +20,118 @@ class Player {
 		return $this->mana;
 	}
 	public function attack() {
-     $mana = $mana - 10;
+     $this->mana = $this->mana - 10;
 	}
 	public function defend() {
-		$blood = $blood - 30;
+		$this->blood = $this->blood - 30;
 	}
-
 }
+// class Number {
+// 	private $total_player;
+// 	function __construct($number){
+// 		$this->total_player = $number;
+// 	}
+// 	public function get_players(){
+// 		return $this->total_player;
+// 	}
+// 	public function add_player($number) {
+// 		$this->total_player = $this->total_player + $number;
+// 	}
+// }
 $x = 1;
 $players = [];
 do{
-echo "
-# ============================== #
-# Welcome to the Battle Arena #
-# ------------------------------------------------- ---- #\n
-# Description: #
-# 1. type 'new' to create a character #
-# 2. type 'quit' to exit the application #
-# ------------------------------------------------- ---- #\n";
-echo "\n";
-echo "# Current Player : " . count($players, COUNT_RECURSIVE) . " #\n
-# - #
-# * Max player 2 or 3 #
-# ------------------------------------------------- ---- #\n \n";
-var_dump($players);
-// var_dump($players);
-// var_dump(count($players, COUNT_RECURSIVE)<3);
+	echo "\n";
+	echo "# ====================================================== #\n";
+	echo "#             Welcome to the Battle Arena                #\n";
+	echo "# ------------------------------------------------- ---- #\n";
+	echo "# Description: #\n";
+	echo "# 1. type 'new' to create a character                    #\n";
+	echo "# 2. type 'start' to exit the application                #\n";
+	echo "# ------------------------------------------------- ---- #\n";
+	echo "\n";
+	echo "# Current Player : " . count($players, COUNT_RECURSIVE) . "                 #\n";
+	echo "# - #\n";
+	echo "# * Max player 2 or 3 #\n";
+	echo "# ------------------------------------------------- ---- #\n \n";
+	// var_dump($players);
+	// var_dump($players);
+	// var_dump(count($players, COUNT_RECURSIVE)<3);
 
-fscanf(STDIN, "%s\n", $input_mode);
-if ($input_mode=="new") {
-	if (count($players, COUNT_RECURSIVE)<3) {
-	echo "# ============================== #
-# Welcome to the Battle Arena #
-# ------------------------------------------------- ---- #
-# Description: #
-# 1 type 'new' to create a character #
-# 2. type 'start' to begin the fight #
-# ------------------------------------------------- ---- #
-# Insert the Number of players : ";
-	// integer $number_players;
-	fscanf(STDIN, "%s\n", $number_players);
-		if ($number_players > 3 && count($players, COUNT_RECURSIVE) < 3) {
-			echo "The Players is too much";
-		}else{			
-			for ($i=0; $i < $number_players ; $i++) { 
-			echo "\n - ";
-			fscanf(STDIN, "%s\n", $input_name);
-			$players[$input_name] = new Player($input_name);
+	fscanf(STDIN, "%s\n", $input_mode);
+	if ($input_mode=="new") {
+		if (count($players, COUNT_RECURSIVE)<3) {
+		echo "\n \n# ====================================================== #\n";
+		echo "#             Welcome to the Battle Arena                #\n";
+		echo "# ------------------------------------------------- ---- #\n";
+		echo "# Insert the Number of players : ";
+		// integer $number_players;
+		fscanf(STDIN, "%s\n", $number_players);
+		// $numbers = new Number($number_players);
+		// $numbers->get_players();
+		// $numbers->add_player($number_players);
+		// echo $numbers->get_players();
+			if ($number_players > 3 || count($players, COUNT_RECURSIVE) > 3) {
+				echo "The Players is too much";
+			}else{			
+				for ($i=0; $i < $number_players; $i++) { 
+				echo "\n - ";
+				fscanf(STDIN, "%s\n", $input_name);
+				$players[$input_name] = new Player($input_name);
+				}
+				echo "#\n";
+				echo "# Current Player : ";
+				echo count($players, COUNT_RECURSIVE);
+				echo "\n# -\n";
+				echo "# * Max player 2 or 3 #\n";
+				echo "# ------------------------------------------------- ---- #\n \n";
 			}
-echo " #\n";
-echo "# Current Player : ";
-echo count($players, COUNT_RECURSIVE);
-echo "\n# - 
-# * Max player 2 or 3 #
-# ------------------------------------------------- ---- #\n \n";
+		}else{
+			echo "\n \nThe Player has sign is too much\n \n \n";
 		}
-	}else{
-		echo "\n \nThe Player has sign is too much\n \n \n";
-	}
-	// if (is_int($number_players)) {
-	// } else {
-	    // echo "Variable is not an integer";
-	// }
-// die();
-} elseif ($input_mode=="start") {
-// var_dump($players[$input_name]);
-echo "# ============================== #
-# Welcome to the Battle Arena #
-# ------------------------------------------------- ---- #
-Battle Start:
-who will attack: ";
-	fscanf(STDIN, "%s\n", $attack);
-	foreach ($players as $key => $value) {
-
-		if ($attack==$value->get_name()) {
-		echo "who attacked : ";
-		fscanf(STDIN, "%s\n", $attacked);
+	} elseif ($input_mode=="start") {
+	$int = 1;
+	do{
+	echo "\n \n# ====================================================== #\n";
+	echo "#             Welcome to the Battle Arena                #\n";
+	echo "# ------------------------------------------------- ---- #\n";
+	echo "Battle Start :\n";
+	echo "who will attack: ";
+		fscanf(STDIN, "%s\n", $attack);
+		foreach ($players as $key => $value) {
+			if ($attack==$value->get_name()) {
+			$value->get_mana();
+			$value->attack();
+			}
+		}
+			echo "\nwho attacked : ";	
+			fscanf(STDIN, "%s\n", $attacked);
+		foreach ($players as $key => $value) {
 			if ($attacked==$value->get_name()) {
-echo "# Welcome to the Battle Arena #
-# ------------------------------------------------- ---- #
-Battle Start:
-who will attack: " . $attack .
-"who attacked: " . $attacked .
-"Description: ";
-// $value[0]->get_name() . ": manna = " . <rest>, blood = <rest>
-// <Nama_player_2>: manna = <rest>, blood = <rest>"
-				
+				$value->get_blood();
+				$value->defend();
+			echo "\n \n# ====================================================== #\n";
+			echo "#             Welcome to the Battle Arena                #\n";
+			echo "# ------------------------------------------------- ---- #\n";
+			echo "Battle Start :\n";
+			echo "who will attack: " . $attack;
+			echo "\n who attacked: " . $attacked;
+			echo "\n Description: \n";
 			}
 		}
-		echo $value->get_name();
+		foreach ($players as $key => $value) {
+			echo $value->get_name() . ": manna = " . $value->get_mana() . ", blood = " . $value->get_blood() . "\n";
+		}
+		foreach ($players as $key => $value) {
+			if ($value->get_mana() < 1 || $value->get_blood() <1) {
+				echo "----------------------GAME OVER----------------------";
+				die();
+			}
+		}
+	}while($int>=0);
+	} else {
+		echo "Your input is " . $input_mode . "\n Please make sure with your input\n";
+		// die();
 	}
-
-// : <Nama_player_2>
-// when pressing enter out the results:
-// # ============================== #
-} else {
-	echo "Your input is " . $input_mode . "\n Please make sure with your input\n";
-	// die();
-}
 }while($x>=0);
-// var_dump($players["Albert"]->get_name());
-// $tsan = JOptionPane.showInputDialog("Masukkan Jam Kerja : ");
 ?>
